@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degen & Meme Coin Mastery - Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Slate Gray & Amber
+        Application Structure Plan: A tab-based dashboard interface is used to structure the course content logically. This breaks down the information into manageable, task-oriented sections (Start Here, The Game, The Toolkit, The Playbook, Pro Tips), which is more user-friendly than a long, linear document. This non-linear structure allows users of different skill levels to jump to the section most relevant to them. The core interactions are tab switching, hovering on informational cards to create engagement, and a visual chart to explain abstract risk concepts. This design prioritizes clarity, ease of navigation, and user engagement over mimicking the original document's linear format.
+        Visualization & Content Choices: 
+        - Report Info: Core Concepts & Prerequisites -> Goal: Onboard new users -> Viz/Method: Interactive cards and lists under a "Start Here" tab -> Interaction: Simple display -> Justification: Provides a clear, non-intimidating entry point.
+        - Report Info: Meme Coin Sources (Alpha, CTO, KOL) -> Goal: Compare and contrast -> Viz/Method: A three-column card layout -> Interaction: Hover effects on cards -> Justification: Visually separates the concepts for easy comparison.
+        - Report Info: Risk/Reward -> Goal: Visualize an abstract concept -> Viz/Method: Chart.js Bar Chart -> Interaction: Static visual aid -> Justification: Offers a quick, data-driven understanding of the risk landscape, making it more tangible than text alone.
+        - Report Info: Tools and Platforms -> Goal: Organize resources -> Viz/Method: Categorized lists in "The Toolkit" section -> Interaction: Simple display -> Justification: Acts as a quick and easy-to-scan reference guide.
+        - Report Info: Trading Advice & Rules -> Goal: Emphasize key rules -> Viz/Method: Grid of "Pro Tip" cards with icons -> Interaction: Hover effects -> Justification: Makes the most critical takeaways memorable and visually striking.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+        }
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background-color: #f59e0b; /* bg-amber-500 */
+            color: #111827;
+        }
+        .tab-btn:not(.active):hover {
+            background-color: #374151; /* bg-gray-700 */
+        }
+        .content-panel {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background-color: #1f2937; /* bg-gray-800 */
+            border: 1px solid #374151; /* border-gray-700 */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.1), 0 4px 6px -2px rgba(245, 158, 11, 0.05);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white">Degen & Meme Coin Mastery</h1>
+            <p class="text-amber-400 mt-2 text-lg">Your Interactive Guide to High-Risk, High-Reward Trading</p>
+        </header>
+
+        <div class="bg-gray-800 rounded-xl p-2 mb-8 sticky top-4 z-10 shadow-lg">
+            <nav id="tab-nav" class="flex flex-wrap justify-center gap-2">
+                <button data-tab="start" class="tab-btn active px-4 py-2 text-sm md:text-base font-semibold rounded-lg">🚀 Start Here</button>
+                <button data-tab="game" class="tab-btn px-4 py-2 text-sm md:text-base font-semibold rounded-lg">🎲 The Game</button>
+                <button data-tab="toolkit" class="tab-btn px-4 py-2 text-sm md:text-base font-semibold rounded-lg">🛠️ The Toolkit</button>
+                <button data-tab="playbook" class="tab-btn px-4 py-2 text-sm md:text-base font-semibold rounded-lg">📖 The Playbook</button>
+                <button data-tab="protips" class="tab-btn px-4 py-2 text-sm md:text-base font-semibold rounded-lg">💡 Pro Tips</button>
+            </nav>
+        </div>
+
+        <main id="content-container">
+            <!-- Tab: Start Here -->
+            <div id="start" class="content-panel">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Foundations for Success</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Before you dive in, understand the commitment and capital required. These are the non-negotiable prerequisites for survival and success.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-xl text-amber-400 mb-3">Time & Capital</h3>
+                        <ul class="space-y-3 list-disc list-inside text-gray-300">
+                            <li><span class="font-semibold">Treat it like a job:</span> At least 2-3 hours/day is a minimal start.</li>
+                            <li><span class="font-semibold">Starting Capital:</span> 1 SOL is minimum to learn, 10+ SOL is better.</li>
+                            <li><span class="font-semibold text-red-400">Warning:</span> Larger capital can lead to faster losses without experience.</li>
+                        </ul>
+                    </div>
+                     <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-xl text-amber-400 mb-3">Essential Knowledge</h3>
+                         <ul class="space-y-3 list-disc list-inside text-gray-300">
+                            <li><span class="font-semibold">Research Skills:</span> You MUST know how to research, check on-chain data, and examine wallets.</li>
+                            <li><span class="font-semibold">Crypto Basics:</span> Solid understanding of crypto, CEX trading, and blockchain is assumed.</li>
+                            <li><span class="font-semibold">Meme Awareness:</span> Be familiar with meme/degen projects and how they operate across chains (ETH, BSC, SOL).</li>
+                             <li><span class="font-semibold">Strong Mindset:</span> A project can die overnight. You need dedication and a cool head.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: The Game -->
+            <div id="game" class="content-panel hidden">
+                 <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Understanding the Playing Field</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Meme coin trading is pure speculation. Know the different types of plays you can make, each with its own risk profile.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-amber-400 mb-2">1. Alpha Gem (Cabals)</h3>
+                        <p class="text-gray-400">Projects with a dedicated team actively pushing the price. The most promising for reliable growth if you get in early, but very difficult to find.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-amber-400 mb-2">2. Community Take Over (CTO)</h3>
+                        <p class="text-gray-400">Coins supported primarily by the community, often with a good story or avatar. Easiest to get involved with; strength depends on the community.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-amber-400 mb-2">3. KOLs/Celebrity Mentions</h3>
+                        <p class="text-gray-400">Coins born from a post by an influencer (e.g., Elon Musk). This is the ultimate high-risk, high-reward play, with potential for 10-100x in minutes.</p>
+                    </div>
+                </div>
+                
+                <div class="card p-4 md:p-6 rounded-lg">
+                    <h3 class="font-bold text-xl text-white text-center mb-4">Meme Coin Source: Risk vs. Potential Reward</h3>
+                    <div class="chart-container">
+                        <canvas id="riskRewardChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: The Toolkit -->
+            <div id="toolkit" class="content-panel hidden">
+                 <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Your Degen Trading Arsenal</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Having the right tools is crucial. Here are the essential platforms and resources you'll need to navigate the degen space.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-xl text-amber-400 mb-3">Decentralized Exchanges (DEXs)</h3>
+                        <p class="text-gray-400 mb-3">The primary marketplaces for meme coins.</p>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-900 p-2 rounded">Pancakeswap (BSC)</li>
+                            <li class="bg-gray-900 p-2 rounded">Uniswap (ETH)</li>
+                            <li class="bg-gray-900 p-2 rounded">Raydium (SOL)</li>
+                            <li class="bg-gray-900 p-2 rounded">Jupiter / Jup.ag (SOL)</li>
+                        </ul>
+                    </div>
+                     <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-xl text-amber-400 mb-3">Trading Platforms (Solana)</h3>
+                        <p class="text-gray-400 mb-3">For faster, more advanced trading on Solana.</p>
+                         <ul class="space-y-2">
+                            <li class="bg-amber-500 text-gray-900 font-bold p-2 rounded">Axiom (Recommended)</li>
+                            <li class="bg-gray-900 p-2 rounded">Photon</li>
+                            <li class="bg-gray-900 p-2 rounded">Gmgn</li>
+                            <li class="bg-gray-900 p-2 rounded">NOVA</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-xl text-amber-400 mb-3">Analysis & Tracking</h3>
+                        <p class="text-gray-400 mb-3">To monitor chains, track wallets, and find alpha.</p>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-900 p-2 rounded">On-Chain Explorers (Solscan, Etherscan)</li>
+                            <li class="bg-gray-900 p-2 rounded">Twitter / X (For sentiment & news)</li>
+                            <li class="bg-gray-900 p-2 rounded">Telegram & Discord (For communities)</li>
+                             <li class="bg-gray-900 p-2 rounded">Wallet Trackers (e.g., kolscan.io)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: The Playbook -->
+            <div id="playbook" class="content-panel hidden">
+                 <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Core Trading Strategies</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Knowing when to enter and exit is everything. This playbook covers fundamental strategies and capital management rules.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-2xl text-green-400 mb-4">When to Buy?</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-lg text-white">Intuition Play</h4>
+                                <p class="text-gray-400">If a project seems interesting, has a good story, or a compelling avatar - sometimes it's that simple. Trust your gut (but be ready to cut).</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-lg text-white">KOL/Narrative Play</h4>
+                                <p class="text-gray-400">If a major influencer mentions a coin, buy immediately if the price is good or you spot a decent dip. Speed is key.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-lg text-white">Insider/Team Play</h4>
+                                <p class="text-gray-400">If you know it's a project from a large, competent team, you can buy and hold, following their strategy and wallet movements.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-2xl text-red-400 mb-4">When to Sell?</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-lg text-white">The 3-Minute Rule</h4>
+                                <p class="text-gray-400">For low-cap degen plays, if there's no volume or positive movement right after you buy, sell immediately. Don't hesitate.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-lg text-white">Momentum Check</h4>
+                                <p class="text-gray-400">For KOL-driven coins, observe the momentum. Check daily volume and see if a community is forming on Twitter. If momentum fades, get out.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold text-lg text-white">Follow the Smart Money</h4>
+                                <p class="text-gray-400">For team-backed projects, monitor the team's wallets. If they start selling, it's probably time for you to sell too.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="card p-6 rounded-lg mt-8">
+                    <h3 class="font-bold text-xl text-amber-400 mb-3">Capital Management Rules</h3>
+                     <ul class="space-y-3 list-disc list-inside text-gray-300">
+                        <li><span class="font-semibold">Unit Size:</span> Risk only a small fraction of your capital per trade. (e.g., 0.25 SOL per trade on a 2 SOL bankroll).</li>
+                        <li><span class="font-semibold">Stop-Loss:</span> Mentally (or physically, if possible) set a stop-loss at -30% to -50%. Respect it.</li>
+                        <li><span class="font-semibold">Cut Losses Quickly:</span> Don't hold losing tokens. Your capital is better deployed elsewhere.</li>
+                        <li><span class="font-semibold">Avoid FOMO:</span> Only buy if you realistically see 2-5x potential from the current price. Don't chase pumps.</li>
+                        <li><span class="font-semibold">Hunt Low-Caps:</span> With small capital (<10 SOL), focus on tokens under $250k market cap for higher growth potential.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab: Pro Tips -->
+            <div id="protips" class="content-panel hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">The Survivor's Mindset</h2>
+                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">95% of memecoins go to zero. These are the rules the profitable traders live by. Internalize them.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Assume It Goes to Zero</h3>
+                        <p class="text-gray-400">Trade like every single memecoin you buy will eventually be worthless. Because it probably will.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Don't Be a Community Member</h3>
+                        <p class="text-gray-400">You are a trader, not a fan. Don't "marry" a token or get emotionally attached. Your goal is profit, not friendship.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Take Profits & Move On</h3>
+                        <p class="text-gray-400">Secure your gains and immediately look for the next opportunity. Greed kills. There are 3,000+ new pairs a day.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Stack Small Wins</h3>
+                        <p class="text-gray-400">Accumulate consistent 50-80% profits. Don't hold out for a 100x on every trade. Small, steady gains build your bankroll.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Find Your Wolfpack</h3>
+                        <p class="text-gray-400">Trade with a trusted group of friends. This reduces your risk of being used as "exit liquidity" for others.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-amber-400 mb-2">Be Patient With Capital</h3>
+                        <p class="text-gray-400">Don't increase your unit size or get reckless as you win. Stay disciplined. Euris didn't change his unit size until 100 SOL.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-12 border-t border-gray-700 pt-6">
+             <p class="text-gray-500">Based on the wisdom of the degen community. Trade responsibly.</p>
+             <p class="text-gray-600 text-sm mt-2">This is not financial advice. All investments carry significant risk.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.content-panel');
+            const tabNav = document.getElementById('tab-nav');
+            let riskChart = null;
+
+            const activateTab = (tabId) => {
+                tabs.forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.tab === tabId);
+                });
+                contents.forEach(content => {
+                    content.classList.toggle('hidden', content.id !== tabId);
+                });
+
+                if (tabId === 'game' && !riskChart) {
+                    renderRiskRewardChart();
+                }
+            };
+
+            tabNav.addEventListener('click', (e) => {
+                if (e.target.matches('.tab-btn')) {
+                    const tabId = e.target.dataset.tab;
+                    activateTab(tabId);
+                }
+            });
+            
+            const renderRiskRewardChart = () => {
+                const ctx = document.getElementById('riskRewardChart').getContext('2d');
+                riskChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Community Take Over (CTO)', 'Alpha Gem (Cabals)', 'KOL/Celebrity Mention'],
+                        datasets: [{
+                            label: 'Risk Level',
+                            data: [5, 7, 10],
+                            backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Potential Reward',
+                            data: [6, 8, 10],
+                            backgroundColor: 'rgba(52, 211, 153, 0.6)',
+                            borderColor: 'rgba(52, 211, 153, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#d1d5db' // text-gray-300
+                                }
+                            },
+                            tooltip: {
+                                titleColor: '#f59e0b',
+                                bodyColor: '#ffffff',
+                                backgroundColor: '#1f2937'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10,
+                                grid: {
+                                    color: 'rgba(55, 65, 81, 0.5)' // border-gray-700
+                                },
+                                ticks: {
+                                    color: '#d1d5db' // text-gray-300
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(55, 65, 81, 0.5)'
+                                },
+                                ticks: {
+                                    color: '#d1d5db' // text-gray-300
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            // Initially activate the first tab
+            activateTab('start');
+        });
+    </script>
+</body>
+</html>
